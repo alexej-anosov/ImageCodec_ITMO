@@ -1,0 +1,19 @@
+model:
+  type: base_ae
+  model_name: base_ae
+  model_kwargs:
+
+data:
+  train_data_path: ./train
+  test_data_path: ./test
+
+training_args:
+  seed: 42
+  use_cuda: True
+  batch_size: 64
+  epochs: 5
+  learning_rate: 3e-04
+  eval_epochs: 10
+  output_dir: ./artifacts
+  run_name: test
+  b_t: 3
