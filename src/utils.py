@@ -1,3 +1,4 @@
+import io
 import os
 import random
 
@@ -56,7 +57,7 @@ def process_images(test_loader, model, device, b, w=128, h=128):
     imgs_decoded = torch.vstack(imgs_decoded)
 
 
-    max_encoded_imgs = imgs_encoded.amax(dim=1, keepdim=True)
+    max_encoded_imgs = imgs_encoded.amax(dim=(1, 2, 3), keepdim=True)
     # Normalize and quantize
     norm_imgs_encoded = imgs_encoded / max_encoded_imgs
     quantized_imgs_encoded = (torch.clip(norm_imgs_encoded, 0, 0.9999999) * pow(2, b)).to(
@@ -71,7 +72,7 @@ def process_images(test_loader, model, device, b, w=128, h=128):
     for i in range(quantized_imgs_encoded.shape[0]):
         size_z, size_h, size_w = quantized_imgs_encoded[i].shape
         encoded_bits = EntropyEncoder(quantized_imgs_encoded[i], size_z, size_h, size_w)
-        byte_size = len(encoded_bits)
+        byte_size = encoded_bits.nbytes
         bpp.append(byte_size * 8 / (w * h))
         quantized_imgs_decoded.append(EntropyDecoder(encoded_bits, size_z, size_h, size_w))
     quantized_imgs_decoded = torch.tensor(np.array(quantized_imgs_decoded, dtype=np.uint8))
@@ -103,17 +104,24 @@ def JPEGRDSingleImage(torch_img, TargetBPP):
     realbpp = 0
     realpsnr = 0
     realQ = 0
+    final_image = None
+
     for Q in range(101):
-        image.save("test.jpeg", "JPEG", quality=Q)
-        image_dec = Image.open("test.jpeg")
-        bytesize = os.path.getsize("test.jpeg")
+        img_bytes = io.BytesIO()
+        image.save(img_bytes, "JPEG", quality=Q)
+        img_bytes.seek(0)
+        image_dec = Image.open(img_bytes)
+        bytesize = len(img_bytes.getvalue())
+
         bpp = bytesize * 8 / (width * height)
         psnr = PSNR_RGB(np.array(image), np.array(image_dec))
         if abs(realbpp - TargetBPP) > abs(bpp - TargetBPP):
             realbpp = bpp
             realpsnr = psnr
             realQ = Q
-    return image, realQ, realbpp, realpsnr
+            final_image = image_dec
+            
+    return final_image, realQ, realbpp, realpsnr
 
 def display_images_and_save_pdf(test_dataset, imgs_decoded, imgsQ_decoded, bpp, filepath=None, NumImagesToShow=None):
     if NumImagesToShow is None:

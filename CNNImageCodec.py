@@ -204,7 +204,6 @@ def JPEGRDSingleImage(X, TargetBPP, i):
     image.save(JPEGfilename, "JPEG", quality=realQ)
     return realQ, realbpp, realpsnr
 
-
 # Main function
 if __name__ == "__main__":
     # Load test images

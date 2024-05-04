@@ -10,7 +10,8 @@ from yaml import CLoader
 
 from src.data.make_dataset import ImageDataset
 from src.modeling.get_model import load_model
-from src.utils import display_images_and_save_pdf, process_images, set_random_seed
+from src.utils import (display_images_and_save_pdf, process_images,
+                       set_random_seed)
 
 tqdm.pandas()
 

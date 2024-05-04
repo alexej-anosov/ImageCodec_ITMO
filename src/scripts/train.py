@@ -99,7 +99,7 @@ def main(config_file):
                        "eval/bpp": np.mean(bpp)}, step=global_step)
             
             output_dir = os.path.join(args_config["training_args"]['output_dir'], args_config["training_args"]["run_name"])
-            save_dir = f"-epoch_{epoch}"
+            save_dir = f"epoch_{epoch}"
             model.save(directory=os.path.join(output_dir, save_dir))
 
     wandb.finish()

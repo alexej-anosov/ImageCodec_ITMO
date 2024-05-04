@@ -1,6 +1,6 @@
-pip install requirements.txt
+pip install -r requirements.txt
 
 wandb init
 python EntropySetup.py build_ext --inplace
 pip install .
-python scripts/train.py --config_file configs/train/base_ae.yml
+# python -m src.scripts.train --config_file configs/train/base_ae.yml
