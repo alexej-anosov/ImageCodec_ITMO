@@ -98,8 +98,8 @@ def main(config_file):
                        "eval/psnr_ae_q": psnr_decoded_q,
                        "eval/bpp": np.mean(bpp)}, step=global_step)
             
-            save_dir = args_config["training_args"]["run_name"] + f"-epoch_{epoch}"
-            output_dir = args_config["training_args"]['output_dir']
+            output_dir = os.path.join(args_config["training_args"]['output_dir'], args_config["training_args"]["run_name"])
+            save_dir = f"-epoch_{epoch}"
             model.save(directory=os.path.join(output_dir, save_dir))
 
     wandb.finish()
