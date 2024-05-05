@@ -1,0 +1,19 @@
+model:
+  type: xv_ae
+  model_name: xv_ae
+  model_kwargs:
+
+data:
+  train_data_path: ./train
+  test_data_path: ./test
+
+training_args:
+  seed: 42
+  use_cuda: True
+  batch_size: 2
+  epochs: 3000
+  learning_rate: 3.0e-04
+  eval_epochs: 20
+  output_dir: ./artifacts
+  run_name: xv_ae-b_2-lr_3e04-b_s_2
+  b_t: 2
