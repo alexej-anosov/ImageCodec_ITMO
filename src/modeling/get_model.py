@@ -1,8 +1,12 @@
 from src.modeling.base_ae import BaseAutoEncoder
 from src.modeling.ln_gelu_ae import LNAutoEncoder
+from src.modeling.xavier_ln_gelu_ae import XAvierLNAutoEncoder
 
-MODEL_DICT = {"base_ae": BaseAutoEncoder,
-              "ln_ae": LNAutoEncoder}
+MODEL_DICT = {
+    "base_ae": BaseAutoEncoder,
+    "ln_ae": LNAutoEncoder,
+    "xv_ln_ae": XAvierLNAutoEncoder,
+}
 
 
 def init_model(model_cfg):
