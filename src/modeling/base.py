@@ -17,7 +17,7 @@ class BaseModel(nn.Module):
         torch.save(self.state_dict(), path)
         logger.info(f"Модель сохранена в {path}")
 
-    def load(self, directory="models"):
+    def load(self, device, directory="models"):
         path = os.path.join(directory, f"{self.model_name}.pth")
-        self.load_state_dict(torch.load(path))
+        self.load_state_dict(torch.load(path, map_location=device))
         logger.info(f"Модель загружена из {path}")

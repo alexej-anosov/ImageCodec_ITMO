@@ -1,9 +1,6 @@
-import os
-
 import click
 import torch
 import yaml
-from loguru import logger
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from yaml import CLoader
@@ -13,8 +10,6 @@ from src.modeling.get_model import load_model
 from src.utils import (display_images_and_save_pdf, process_images,
                        set_random_seed)
 
-tqdm.pandas()
-
 
 @click.command()
 @click.option("--config_file", default="config.yaml", help="Path to config YAML file")
@@ -22,16 +17,17 @@ def main(config_file):
     with open(config_file, "r") as f:
         args_config = yaml.load(f, Loader=CLoader)
 
-    set_random_seed(args_config["training_args"]["seed"])
+    set_random_seed(args_config["seed"])
 
     device = (
         "cuda"
-        if torch.cuda.is_available() and args_config["training_args"]["use_cuda"]
+        if torch.cuda.is_available()
         else "cpu"
     )
 
-    model = load_model(args_config["model"], model_path=args_config["model_dir"])
+    model = load_model(args_config["model"], model_path=args_config["model_dir"], device=device)
     model.to(device)
+    model.eval()
 
     b = args_config["b"]
     output_filename = args_config["output_filename"]

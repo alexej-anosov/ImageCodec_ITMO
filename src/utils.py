@@ -21,7 +21,7 @@ def PSNR(y_true, y_pred):
     max_pixel = 1.0
     mse = torch.mean(torch.square(y_pred - y_true))
     if mse == 0:
-        return float('inf')  # consistent handling of zero MSE
+        return float('inf')
     return (10 * torch.log10(max_pixel ** 2 / mse)).item()
 
 def EntropyEncoder(enc_img, size_z, size_h, size_w):

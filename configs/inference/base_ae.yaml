@@ -6,7 +6,7 @@ model:
 data_path: ./test
 
 seed: 42
-model_dir: ./test
+model_dir: ./artifacts/base_ae-b_2-lr_3e04-b_s_128/epoch_2999
 batch_size: 64
-output_filename: base_ae.pdf
-b: 3
+output_filename: ./artifacts/base_ae-b_2-lr_3e04-b_s_128/epoch_2999/base_ae-b_2-lr_3e04-b_s_128.pdf
+b: 2
