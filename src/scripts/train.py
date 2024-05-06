@@ -43,6 +43,7 @@ def main(config_file):
     model.to(device)
 
     b_t = args_config["training_args"]["b_t"]
+    b = args_config["training_args"].get("b", 2)
     batch_size = args_config["training_args"]["batch_size"]
     learning_rate = args_config["training_args"]["learning_rate"]
 
@@ -88,7 +89,7 @@ def main(config_file):
                     test_loss += nn.MSELoss()(val_outputs, val_batch).item()
 
             test_loss /= len(test_loader)
-            imgs_decoded, imgsQ_decoded, bpp = process_images(test_loader, model, device, b_t)
+            imgs_decoded, imgsQ_decoded, bpp = process_images(test_loader, model, device, b)
             fig, psnr_decoded, psnr_decoded_q, _ = display_images_and_save_pdf(test_dataset, imgs_decoded, imgsQ_decoded, bpp)
             run.log({"eval/loss": test_loss,
                        "epoch": epoch,

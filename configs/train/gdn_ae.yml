@@ -17,3 +17,4 @@ training_args:
   output_dir: ./artifacts
   run_name: gdn_ae-b_2-lr_3e04-b_s_2
   b_t: 2
+  b: 2

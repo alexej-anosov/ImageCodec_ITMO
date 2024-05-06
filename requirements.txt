@@ -7,3 +7,4 @@ click==8.1.7
 numpy==1.24.1
 wandb==0.16.6
 torchvision==0.17.2
+compressai==1.2.6
