@@ -85,8 +85,8 @@ def process_images(test_loader, model, device, b, w=128, h=128):
 
     with torch.no_grad():
         for deq_img in dequantized_denorm_imgs_decoded:
-            deq_img = deq_img.to(device)
-            decoded_imgQ = model.decoder(deq_img)
+            deq_img = deq_img.to(device)[None, :]
+            decoded_imgQ = model.decoder(deq_img)[0]
 
             imgsQ_decoded.append(decoded_imgQ.cpu().detach())
 

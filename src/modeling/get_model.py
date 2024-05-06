@@ -3,6 +3,7 @@ from src.modeling.ln_gelu_ae import LNAutoEncoder
 from src.modeling.xavier_ln_gelu_ae import XAvierLNAutoEncoder
 from src.modeling.xavier_gelu_ae import XAvierAutoEncoder
 from src.modeling.base_ae_v2 import BaseAutoEncoderV2
+from src.modeling.gdn_ae import GDNAutoEncoder
 
 MODEL_DICT = {
     "base_ae": BaseAutoEncoder,
@@ -10,6 +11,7 @@ MODEL_DICT = {
     "xv_ln_ae": XAvierLNAutoEncoder,
     "xv_ae": XAvierAutoEncoder,
     "base_ae_v2": BaseAutoEncoderV2,
+    "gdn_ae": GDNAutoEncoder
 }
 
 
