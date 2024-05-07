@@ -4,10 +4,13 @@ import random
 
 import numpy as np
 import torch
+import torch.nn as nn
+import torch.nn.functional as F
 from EntropyCodec import *
 from matplotlib import pyplot as plt
 from PIL import Image
 from torchvision import transforms
+from torchvision.models import vgg16
 
 to_pil_transform = transforms.ToPILImage()
 
@@ -181,3 +184,15 @@ def set_random_seed(seed):
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
+
+class PerceptualLoss(nn.Module):
+    def __init__(self):
+        super(PerceptualLoss, self).__init__()
+        vgg = vgg16(pretrained=True)
+        self.feature_extractor = nn.Sequential(*list(vgg.features)[:23]).eval()
+        for param in self.feature_extractor.parameters():
+            param.requires_grad = False
+
+    def forward(self, reconstructed, original):
+        loss = F.mse_loss(self.feature_extractor(reconstructed), self.feature_extractor(original))
+        return loss

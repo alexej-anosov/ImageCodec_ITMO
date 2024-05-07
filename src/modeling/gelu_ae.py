@@ -1,32 +1,32 @@
 import torch
 import torch.nn as nn
-
-from src.modeling.base import BaseModel
 from compressai.entropy_models import EntropyBottleneck
 from compressai.layers import GDN
 
+from src.modeling.base import BaseModel
 
-class GDNAutoEncoder(BaseModel):
-    def __init__(self, model_name='dng_ae'):
-        super(GDNAutoEncoder, self).__init__(model_name)
+
+class GELUAutoEncoder(BaseModel):
+    def __init__(self, model_name='gelu_ae'):
+        super(GELUAutoEncoder, self).__init__(model_name)
         self.encoder = nn.Sequential(
             nn.Conv2d(3, 128, kernel_size=7, padding=3, stride=2),
-            GDN(128),
-            nn.Conv2d(128, 32, kernel_size=3, padding=1, stride=2),
-            GDN(32),
+            nn.GELU(),
+            nn.Conv2d(128, 32, kernel_size=5, padding=2, stride=2),
+            nn.GELU(),
             nn.Conv2d(32, 16, kernel_size=3, padding=1, stride=2),
-            GDN(16),
+            nn.GELU(),
         )
 
         self.decoder = nn.Sequential(
             nn.ConvTranspose2d(
                 16, 32, kernel_size=3, stride=2, padding=1, output_padding=1
             ),
-            GDN(32, inverse=True),
+            nn.GELU(),
             nn.ConvTranspose2d(
                 32, 128, kernel_size=5, stride=2, padding=2, output_padding=1
             ),
-            GDN(128, inverse=True),
+            nn.GELU(),
             nn.ConvTranspose2d(
                 128, 3, kernel_size=7, stride=2, padding=3, output_padding=1
             ),

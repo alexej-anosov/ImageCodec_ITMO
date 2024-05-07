@@ -3,6 +3,7 @@ import torch.nn as nn
 
 from src.modeling.base import BaseModel
 
+
 class LNAutoEncoder(BaseModel):
     def __init__(self, model_name='ln_auto_encoder'):
         super(LNAutoEncoder, self).__init__(model_name)

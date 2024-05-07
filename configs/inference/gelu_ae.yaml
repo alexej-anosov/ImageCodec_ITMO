@@ -1,0 +1,12 @@
+model:
+  type: gelu_ae
+  model_name: gelu_ae
+  model_kwargs:
+
+data_path: ./test
+
+seed: 42
+model_dir: ./artifacts/gelu_ae-b_2-lr_3e04-b_s_2/epoch_339
+batch_size: 64
+output_filename: ./artifacts/gelu_ae-b_2-lr_3e04-b_s_2/epoch_339/gelu_ae-b_2-lr_3e04-b_s_2.pdf
+b: 2

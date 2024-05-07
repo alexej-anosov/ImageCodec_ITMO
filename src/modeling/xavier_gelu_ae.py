@@ -3,6 +3,7 @@ import torch.nn as nn
 
 from src.modeling.base import BaseModel
 
+
 class XAvierAutoEncoder(BaseModel):
     def __init__(self, model_name='xv_ae'):
         super(XAvierAutoEncoder, self).__init__(model_name)
