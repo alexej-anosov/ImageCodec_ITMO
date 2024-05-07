@@ -1,10 +1,10 @@
 from src.modeling.base_ae import BaseAutoEncoder
+from src.modeling.ln_gelu_ae import LNAutoEncoder
+from src.modeling.xavier_ln_gelu_ae import XAvierLNAutoEncoder
+from src.modeling.xavier_gelu_ae import XAvierAutoEncoder
 from src.modeling.base_ae_v2 import BaseAutoEncoderV2
 from src.modeling.gelu_ae import GELUAutoEncoder
-from src.modeling.ln_gelu_ae import LNAutoEncoder
-from src.modeling.resudial_ae import ResAutoEncoder
-from src.modeling.xavier_gelu_ae import XAvierAutoEncoder
-from src.modeling.xavier_ln_gelu_ae import XAvierLNAutoEncoder
+from src.modeling.residual_ae import ResAutoEncoder
 
 MODEL_DICT = {
     "base_ae": BaseAutoEncoder,
@@ -13,7 +13,7 @@ MODEL_DICT = {
     "xv_ae": XAvierAutoEncoder,
     "base_ae_v2": BaseAutoEncoderV2,
     "gelu_ae": GELUAutoEncoder,
-    "resudial_ae": ResAutoEncoder
+    "residual_ae": ResAutoEncoder
 }
 
 

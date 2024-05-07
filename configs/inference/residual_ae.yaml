@@ -1,0 +1,12 @@
+model:
+  type: residual_ae
+  model_name: residual_ae
+  model_kwargs:
+
+data_path: ./test
+
+seed: 42
+model_dir: ./artifacts/residual_ae-b_2-lr_3e04-b_s_2/epoch_139
+batch_size: 64
+output_filename: ./artifacts/residual_ae-b_2-lr_3e04-b_s_2/epoch_139/residual_ae-b_2-lr_3e04-b_s_2.pdf
+b: 2
