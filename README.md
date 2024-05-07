@@ -17,3 +17,6 @@ python -m src.scripts.train --config_file configs/train/residual_ae.yaml
 ```
 python -B -m src.scripts.inference --config_file ./configs/inference/residual_ae.yaml
 ```
+
+### Модель и результаты на тесте
+artifacts/residual_ae-b_2-lr_3e04-b_s_2/epoch_139
