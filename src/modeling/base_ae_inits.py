@@ -6,8 +6,8 @@ from src.modeling.base import BaseModel
 
 class BaseAutoEncoderWithInits(BaseModel):
     def __init__(self, init_method, model_name='base_auto_encoder'):
-        print(init_method)
         super(BaseAutoEncoder, self).__init__(model_name)
+        print(init_method)
         self.encoder = nn.Sequential(
             nn.Conv2d(3, 128, kernel_size=7, padding=3),
             nn.BatchNorm2d(128),
