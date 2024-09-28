@@ -2,7 +2,7 @@ model:
   type: base_ae_with_init
   model_name: base_ae_with_init
   model_kwargs: 
-    init_method: 'kaiming' 
+    init_method: kaiming 
 
 data:
   train_data_path: ./train
