@@ -4,7 +4,7 @@ import torch.nn as nn
 from src.modeling.base import BaseModel
 
 
-class BaseAutoEncoder(BaseModel):
+class BaseAutoEncoderWithInits(BaseModel):
     def __init__(self, init_method, model_name='base_auto_encoder'):
         print(init_method)
         super(BaseAutoEncoder, self).__init__(model_name)
