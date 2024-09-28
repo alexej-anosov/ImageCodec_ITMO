@@ -5,7 +5,7 @@ from src.modeling.base import BaseModel
 
 
 class BaseAutoEncoderWithInits(BaseModel):
-    def __init__(self, init_method, model_name='base_auto_encoder'):
+    def __init__(self, model_name='base_auto_encoder', init_method=None):
         super(BaseAutoEncoder, self).__init__(model_name)
         print(init_method)
         self.encoder = nn.Sequential(
