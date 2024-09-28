@@ -5,7 +5,7 @@ from src.modeling.base_ae_inits import BaseAutoEncoderWithInits
 
 MODEL_DICT = {
     "base_ae": BaseAutoEncoder,
-    "base_as_with_init": BaseAutoEncoderWithInits, 
+    "base_ae_with_init": BaseAutoEncoderWithInits, 
 }
 
 
