@@ -14,7 +14,7 @@ def init_model(model_cfg):
         {} if model_cfg["model_kwargs"] is None else model_cfg["model_kwargs"]
     )
     print(model_kwargs)
-    model = MODEL_DICT[model_cfg["type"]](model_cfg["model_name"], **model_kwargs)
+    model = MODEL_DICT[model_cfg["type"]](**model_kwargs, model_cfg["model_name"])
 
     return model
 
