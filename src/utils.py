@@ -104,7 +104,7 @@ def JPEGRDSingleImage(torch_img, TargetBPP):
 
     width, height = image.size
     realbpp = 0
-    realpsnr = 0
+    realssim = 0
     realQ = 0
     final_image = None
 
@@ -116,14 +116,23 @@ def JPEGRDSingleImage(torch_img, TargetBPP):
         bytesize = len(img_bytes.getvalue())
 
         bpp = bytesize * 8 / (width * height)
-        psnr = SSIM_numpy(np.array(image), np.array(image_dec))
+        ssim = SSIM_numpy(np.array(image), np.array(image_dec))
         if abs(realbpp - TargetBPP) > abs(bpp - TargetBPP):
             realbpp = bpp
-            realpsnr = psnr
+            realssim = ssim
             realQ = Q
             final_image = image_dec
             
-    return final_image, realQ, realbpp, realpsnr
+    return final_image, realQ, realbpp, realssim
+
+def count_mean_ssim_and_bpp_jpg(test_dataset, target_bpps):
+    real_ssims = []
+    real_bpps = []
+    for i in range(len(test_dataset)):
+        final_image, realQ, realbpp, realssim = JPEGRDSingleImage(test_dataset[i], target_bpps[i])
+        real_ssims.append(realssim)
+        real_bpps.append(real_bpps)
+    return np.mean(real_ssims), np.mean(real_bpps)
 
 def display_images_and_save_pdf(test_dataset, imgs_decoded, imgsQ_decoded, bpp, filepath=None, NumImagesToShow=None):
     if NumImagesToShow is None:

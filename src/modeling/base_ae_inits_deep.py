@@ -39,6 +39,21 @@ class BaseAutoEncoderWithInitsDeep(BaseModel):
 
         self.initialize_weights(init_method)
 
+
+    def initialize_weights(self, init_method):
+        def init_func(m):
+            if isinstance(m, (nn.Conv2d, nn.ConvTranspose2d)):
+                if init_method == 'xavier':
+                    nn.init.xavier_uniform_(m.weight)
+                elif init_method == 'kaiming':
+                    nn.init.kaiming_uniform_(m.weight, nonlinearity='relu')
+                elif init_method == 'orthogonal':
+                    nn.init.orthogonal_(m.weight)
+                if m.bias is not None:
+                    nn.init.constant_(m.bias, 0)
+        
+        self.apply(init_func)
+
     def forward(self, x, b_t=None):
         x = self.encoder(x)
         if self.training and b_t is not None:
