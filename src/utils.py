@@ -42,7 +42,7 @@ def EntropyDecoder(bitstream, size_z, size_h, size_w):
     HiddenLayersDecoder(decoded_data, size_w, size_h, size_z, bitstream, FrameOffset)
     return decoded_data
 
-def process_images(test_loader, model, device, b, w=128, h=128):
+def process_images(test_loader, model, device, b, b_t, w=128, h=128):
     imgs_encoded = []
     imgs_decoded = []
 
@@ -96,7 +96,7 @@ def process_images(test_loader, model, device, b, w=128, h=128):
 
     assert imgsQ_decoded.shape == imgs_decoded.shape
     assert imgsQ_decoded.shape[0] == len(bpp)
-
+    
     return imgs_decoded, imgsQ_decoded, bpp
 
 def JPEGRDSingleImage(torch_img, TargetBPP):
@@ -195,3 +195,13 @@ class PerceptualLoss(nn.Module):
     def forward(self, reconstructed, original):
         loss = F.mse_loss(self.feature_extractor(reconstructed), self.feature_extractor(original))
         return loss
+    
+
+def count_mean_ssim(test_dataset,imgsQ_decoded):
+
+    ssim_values = []
+    for i in range(len(test_dataset)):
+        ssim_value = SSIM_torch(test_dataset[i], imgsQ_decoded[i])
+        ssim_values.append(ssim_value)
+
+    return np.mean(ssim_values)

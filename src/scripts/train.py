@@ -15,7 +15,7 @@ from yaml import CLoader
 from src.data.make_dataset import ImageDataset
 from src.modeling.get_model import init_model
 from src.utils import (PerceptualLoss, display_images_and_save_pdf,
-                       process_images, set_random_seed)
+                       process_images, set_random_seed, count_mean_ssim)
 
 tqdm.pandas()
 
@@ -109,21 +109,45 @@ def main(config_file):
                         run.log({"eval/aux_loss": val_aux_loss.item(), "epoch": epoch, "step": global_step}, step=global_step)
 
             test_loss /= len(test_loader)
-            imgs_decoded, imgsQ_decoded, bpp = process_images(
-                test_loader, model, device, b
+            imgs_decoded2, imgsQ2_decoded, bpp2, = process_images(
+                test_loader, model, device, b=2
             )
-            fig, psnr_decoded, psnr_decoded_q, _ = display_images_and_save_pdf(
-                test_dataset, imgs_decoded, imgsQ_decoded, bpp
+            ssim2 = count_mean_ssim(test_dataset, imgsQ2_decoded)
+
+            imgs_decoded3, imgsQ3_decoded, ssim3, bpp3, = process_images(
+                test_loader, model, device, b=3
             )
+            ssim3 = count_mean_ssim(test_dataset, imgsQ3_decoded)
+
+            imgs_decoded4, imgsQ4_decoded, ssim4, bpp4, = process_images(
+                test_loader, model, device, b=4
+            )
+            ssim4 = count_mean_ssim(test_dataset, imgsQ4_decoded)
+
+            imgs_decoded5, imgsQ5_decoded, ssim5,  bpp5, = process_images(
+                test_loader, model, device, b=5
+            )
+            ssim5 = count_mean_ssim(test_dataset, imgsQ5_decoded)
+
+            fig, ssim_decoded2, ssim_decoded_q2, _ = display_images_and_save_pdf(
+                test_dataset, imgs_decoded2, imgsQ2_decoded, bpp2
+            )
+
             run.log(
                 {
                     "eval/loss": test_loss,
                     "epoch": epoch,
                     "step": global_step,
                     "eval/cherry_pick": fig,
-                    "eval/psnr_ae": psnr_decoded,
-                    "eval/psnr_ae_q": psnr_decoded_q,
-                    "eval/bpp": np.mean(bpp),
+                    "eval/ssim_ae_b2": ssim_decoded2,
+                    "eval/ssim_ae_q_b2": ssim2,
+                    "eval/bpp_b2": np.mean(bpp2),
+                    "eval/ssim_ae_q_b3": ssim3,
+                    "eval/bpp_b3": np.mean(bpp3),
+                    "eval/ssim_ae_q_b4": ssim4,
+                    "eval/bpp_b4": np.mean(bpp4),
+                    "eval/ssim_ae_q_b5": ssim5,
+                    "eval/bpp_b5": np.mean(bpp5),
                 },
                 step=global_step,
             )
