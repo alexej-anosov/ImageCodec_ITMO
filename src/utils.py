@@ -42,7 +42,7 @@ def EntropyDecoder(bitstream, size_z, size_h, size_w):
     HiddenLayersDecoder(decoded_data, size_w, size_h, size_z, bitstream, FrameOffset)
     return decoded_data
 
-def process_images(test_loader, model, device, b, b_t, w=128, h=128):
+def process_images(test_loader, model, device, b, w=128, h=128):
     imgs_encoded = []
     imgs_decoded = []
 
