@@ -12,18 +12,18 @@ class BaseAutoEncoderWithInitsBottleneck(BaseModel):
             nn.BatchNorm2d(64),
             nn.ReLU(),
             nn.AvgPool2d(2),
-            nn.Conv2d(64, 32, kernel_size=3, padding=1),
+            nn.Conv2d(64, 16, kernel_size=3, padding=1),
             nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.AvgPool2d(2),
-            nn.Conv2d(32, 8, kernel_size=3, padding=1),
-            nn.BatchNorm2d(8),
+            nn.Conv2d(16, 12, kernel_size=3, padding=1),
+            nn.BatchNorm2d(12),
             nn.ReLU(),
             nn.AvgPool2d(2),
         )
 
         self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(8, 16, kernel_size=3, stride=2, padding=1, output_padding=1),
+            nn.ConvTranspose2d(12, 16, kernel_size=3, stride=2, padding=1, output_padding=1),
             nn.ReLU(),
             nn.ConvTranspose2d(16, 64, kernel_size=3, stride=2, padding=1, output_padding=1),
             nn.ReLU(),
