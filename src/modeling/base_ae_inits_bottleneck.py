@@ -17,7 +17,7 @@ class BaseAutoEncoderWithInitsBottleneck(BaseModel):
             nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.AvgPool2d(2),
-            nn.Conv2d(32, 16, kernel_size=3, padding=1),
+            nn.Conv2d(32, 12, kernel_size=3, padding=1),
             nn.BatchNorm2d(12),
             nn.ReLU(),
             nn.AvgPool2d(2),
