@@ -118,6 +118,9 @@ def JPEGRDSingleImage(torch_img, TargetBPP):
         bpp = bytesize * 8 / (width * height)
         ssim = SSIM_numpy(np.array(image), np.array(image_dec))
         
+        print(realbpp, TargetBPP, bpp, Q)
+        print(abs(realbpp - TargetBPP), abs(bpp - TargetBPP))
+
         if (abs(realbpp - TargetBPP) > abs(bpp - TargetBPP)) and (type(image_dec) != NoneType):
             realbpp = bpp
             realssim = ssim
