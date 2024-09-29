@@ -110,28 +110,28 @@ def main(config_file):
 
             test_loss /= len(test_loader)
             
-            imgs_decoded2, imgsQ2_decoded, bpp2, = process_images(
+            imgs_decoded2, imgsQ2_decoded, bpp2 = process_images(
                 test_loader, model, device, b=2
             )
             ssim2 = count_mean_ssim(test_dataset, imgsQ2_decoded)
             ssim2_jpg, bpp2_jpg = count_mean_ssim_and_bpp_jpg(test_dataset, bpp2)
 
 
-            imgs_decoded3, imgsQ3_decoded, ssim3, bpp3, = process_images(
+            imgs_decoded3, imgsQ3_decoded, bpp3 = process_images(
                 test_loader, model, device, b=3
             )
             ssim3 = count_mean_ssim(test_dataset, imgsQ3_decoded)
             ssim3_jpg, bpp3_jpg = count_mean_ssim_and_bpp_jpg(test_dataset, bpp3)
 
 
-            imgs_decoded4, imgsQ4_decoded, ssim4, bpp4, = process_images(
+            imgs_decoded4, imgsQ4_decoded, bpp4 = process_images(
                 test_loader, model, device, b=4
             )
             ssim4 = count_mean_ssim(test_dataset, imgsQ4_decoded)
             ssim4_jpg, bpp4_jpg = count_mean_ssim_and_bpp_jpg(test_dataset, bpp4)
 
 
-            imgs_decoded5, imgsQ5_decoded, ssim5,  bpp5, = process_images(
+            imgs_decoded5, imgsQ5_decoded, bpp5 = process_images(
                 test_loader, model, device, b=5
             )
 
