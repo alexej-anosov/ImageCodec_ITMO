@@ -11,10 +11,10 @@ data:
 training_args:
   seed: 42
   use_cuda: True
-  batch_size: 32
+  batch_size: 24
   epochs: 6000
   learning_rate: 3.0e-04
   eval_epochs: 500
   output_dir: ./artifacts
-  run_name: base_ae_b32_s6000_lr3e4_orthogonal_bottleneck
+  run_name: base_ae_b24_s6000_lr3e4_orthogonal_bottleneck
   b_t: 2
