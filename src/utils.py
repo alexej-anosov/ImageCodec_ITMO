@@ -134,7 +134,9 @@ def count_mean_ssim_and_bpp_jpg(test_dataset, target_bpps):
         real_ssims.append(realssim)
         real_bpps.append(real_bpps)
     print(123)
-    return np.mean(real_ssims), np.mean(real_bpps)
+    ssim, bpps = sum(real_ssims)/len(real_ssims), sum(real_bpps)/len(real_bpps)
+    print(123)
+    return ssim, bpps
 
 def display_images_and_save_pdf(test_dataset, imgs_decoded, imgsQ_decoded, bpp, filepath=None, NumImagesToShow=None):
     if NumImagesToShow is None:
