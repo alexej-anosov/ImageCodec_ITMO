@@ -134,7 +134,10 @@ def count_mean_ssim_and_bpp_jpg(test_dataset, target_bpps):
         real_ssims.append(realssim)
         real_bpps.append(real_bpps)
     print(123)
-    ssim, bpps = sum(real_ssims)/len(real_ssims), sum(real_bpps)/len(real_bpps)
+    print(real_ssims)
+    print(real_bpps)
+    ssim= sum(real_ssims)/len(real_ssims)
+    bpps = sum(real_bpps)/len(real_bpps)
     print(123)
     return ssim, bpps
 
