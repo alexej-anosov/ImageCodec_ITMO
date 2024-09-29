@@ -175,6 +175,8 @@ def display_images_and_save_pdf(test_dataset, imgs_decoded, imgsQ_decoded, bpp, 
     for i in range(NumImagesToShow):
         print(test_dataset[i].shape, bpp[i])
         jpeg_img, JPEGQP, JPEGrealbpp, JPEGrealpsnr = JPEGRDSingleImage(test_dataset[i], bpp[i])
+        print(jpeg_img.shape)
+        print(jpeg_img.dtype)
         psnr_jpeg.append(JPEGrealpsnr)
         plt.subplot(rows, cols, 3 * cols + i + 1)
         plt.imshow(jpeg_img, interpolation="nearest")
