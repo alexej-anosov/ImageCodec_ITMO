@@ -1,7 +1,7 @@
 import io
 import os
 import random
-
+from types import NoneType
 import numpy as np
 import torch
 import torch.nn as nn
@@ -117,13 +117,8 @@ def JPEGRDSingleImage(torch_img, TargetBPP):
 
         bpp = bytesize * 8 / (width * height)
         ssim = SSIM_numpy(np.array(image), np.array(image_dec))
-
-        try:
-            print(image_dec.shape, realbpp, Q, TargetBPP)
-        except:
-            print(type(image_dec), realbpp, Q, TargetBPP)
         
-        if (abs(realbpp - TargetBPP) > abs(bpp - TargetBPP)) and ():
+        if (abs(realbpp - TargetBPP) > abs(bpp - TargetBPP)) and (type(image_dec) != NoneType):
             realbpp = bpp
             realssim = ssim
             realQ = Q
