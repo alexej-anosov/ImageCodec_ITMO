@@ -1,5 +1,5 @@
 model:
-  type: base_ae_with_init_bottleneck_mish
+  type: base_ae_with_init_bottleneck_activation
   model_name: base_ae_with_init_bottleneck_mish
   model_kwargs: 
     init_method: orthogonal 

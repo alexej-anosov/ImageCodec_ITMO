@@ -19,15 +19,15 @@ class BaseAutoEncoderWithInitsBottleneckActivation(BaseModel):
             nn.BatchNorm2d(32),
             self.activation(),
             nn.AvgPool2d(2),
-            nn.Conv2d(32, 12, kernel_size=3, padding=1),
-            nn.BatchNorm2d(12),
+            nn.Conv2d(32, 16, kernel_size=3, padding=1),
+            nn.BatchNorm2d(16),
             self.activation(),
             nn.AvgPool2d(2),
         )
 
         self.decoder = nn.Sequential(
             nn.ConvTranspose2d(
-                12, 32, kernel_size=3, stride=2, padding=1, output_padding=1
+                16, 32, kernel_size=3, stride=2, padding=1, output_padding=1
             ),
             self.activation(),
             nn.ConvTranspose2d(
