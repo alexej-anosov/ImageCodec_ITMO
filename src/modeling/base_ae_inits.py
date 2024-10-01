@@ -10,15 +10,15 @@ class BaseAutoEncoderWithInits(BaseModel):
         print(init_method)
         self.encoder = nn.Sequential(
             nn.Conv2d(3, 128, kernel_size=7, padding=3),
-            nn.BatchNorm2d(128),
+            nn.LayerNorm([128, 128, 128]),
             nn.ReLU(),
             nn.AvgPool2d(2),
             nn.Conv2d(128, 32, kernel_size=5, padding=2),
-            nn.BatchNorm2d(32),
+            nn.LayerNorm([32, 64, 64]),
             nn.ReLU(),
             nn.AvgPool2d(2),
             nn.Conv2d(32, 16, kernel_size=3, padding=1),
-            nn.BatchNorm2d(16),
+            nn.LayerNorm([16, 32, 32]),
             nn.ReLU(),
             nn.AvgPool2d(2),
         )
